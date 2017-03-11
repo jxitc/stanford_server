@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <display-name>Archetype Created Web Application</display-name>
+	<servlet>
+		<servlet-name>NlpServlet</servlet-name>
+		<servlet-class>com.jxitc.servlet.NlpServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NlpServlet</servlet-name>
+		<url-pattern>/nlp</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Status</servlet-name>
+		<servlet-class>com.mobvoi.be.servlet.StatusServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Status</servlet-name>
+		<url-pattern>/status</url-pattern>
+	</servlet-mapping>
+</web-app>
