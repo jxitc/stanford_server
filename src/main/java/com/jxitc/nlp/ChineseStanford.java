@@ -1,9 +1,11 @@
 package com.jxitc.nlp;
 
+import edu.stanford.nlp.ling.CoreAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import edu.stanford.nlp.util.CoreMap;
 import edu.stanford.nlp.util.PropertiesUtils;
 import org.apache.log4j.Logger;
 
@@ -43,15 +45,21 @@ public class ChineseStanford {
     List<CoreLabel> coreLbls = document.get(CoreAnnotations.TokensAnnotation.class);
     List<Token> rtn = new ArrayList<>();
     for (CoreLabel coreLbl : coreLbls) {
-      Token token = new Token();
-      token.rawStr = coreLbl.getString(CoreAnnotations.TextAnnotation.class);
-      token.pos = coreLbl.getString(CoreAnnotations.PartOfSpeechAnnotation.class);
-      token.ner = coreLbl.getString(CoreAnnotations.NamedEntityTagAnnotation.class);
-      token.startIndex = coreLbl.beginPosition();
-      token.endIndex = coreLbl.endPosition();
-      rtn.add(token);
+      rtn.add(Token.parse(coreLbl));
     }
     return rtn;
+  }
+
+  public List<Sentence> parseDocument(String docString){
+    Annotation annotation = new Annotation(docString);
+    this.corenlp.annotate(annotation);
+    List<CoreMap> coreMaps = annotation.get(CoreAnnotations.SentencesAnnotation.class);
+    List<Sentence> sentences = new ArrayList<>();
+    for (CoreMap cm : coreMaps) {
+      sentences.add(new Sentence(cm));
+    }
+    logger.info(String.format("Parsed to %d sentences", sentences.size()));
+    return sentences;
   }
 
   public static void main(String[] args) {

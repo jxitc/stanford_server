@@ -3,6 +3,8 @@
 package com.jxitc.nlp;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.ling.CoreLabel;
 
 /**
  * Data structure for token
@@ -23,4 +25,14 @@ public class Token {
   public String pos;
 
   public String ner;
+
+  public static Token parse(CoreLabel coreLbl) {
+    Token token = new Token();
+    token.rawStr = coreLbl.getString(CoreAnnotations.TextAnnotation.class);
+    token.pos = coreLbl.getString(CoreAnnotations.PartOfSpeechAnnotation.class);
+    token.ner = coreLbl.getString(CoreAnnotations.NamedEntityTagAnnotation.class);
+    token.startIndex = coreLbl.beginPosition();
+    token.endIndex = coreLbl.endPosition();
+    return token;
+  }
 }

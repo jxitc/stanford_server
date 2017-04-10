@@ -12,10 +12,18 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>Status</servlet-name>
-		<servlet-class>com.mobvoi.be.servlet.StatusServlet</servlet-class>
+		<servlet-class>com.jxitc.servlet.StatusServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Status</servlet-name>
 		<url-pattern>/status</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Contract</servlet-name>
+		<servlet-class>com.jxitc.servlet.ContractServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Contract</servlet-name>
+		<url-pattern>/contract</url-pattern>
 	</servlet-mapping>
 </web-app>
