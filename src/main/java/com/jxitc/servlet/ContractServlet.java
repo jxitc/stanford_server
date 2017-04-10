@@ -21,6 +21,7 @@ public class ContractServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    req.setCharacterEncoding("utf8");
     String postStr = getPostAsString(req);
     JSONObject jObj = JSON.parseObject(postStr);
     String text = jObj.getString("text");
