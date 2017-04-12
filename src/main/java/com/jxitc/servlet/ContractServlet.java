@@ -31,8 +31,19 @@ public class ContractServlet extends HttpServlet {
     rtn.put("status", "ok");
     rtn.put("important", new JSONArray());
     for (String line : lines) {
-      for (String importantSen : ca.extractImportantSentences(line)) {
-        rtn.getJSONArray("important").add(importantSen);
+      line = line.trim();
+      if (line.isEmpty()) {
+        System.out.println("[skip] " + line);
+        continue;
+      }
+      System.out.println("[processing] " + line);
+      logger.info("[processing] " + line);
+      try {
+        for (String importantSen : ca.extractImportantSentences(line)) {
+          rtn.getJSONArray("important").add(importantSen);
+        }
+      } catch (Exception ex) {
+        ex.printStackTrace();
       }
     }
     resp.setCharacterEncoding("utf8");
