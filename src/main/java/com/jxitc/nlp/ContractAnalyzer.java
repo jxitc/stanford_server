@@ -17,7 +17,7 @@ public class ContractAnalyzer {
   private static List<String> TARGET_NERS = Arrays.asList("MONEY", "DATE", "NUMBER");
 
   private static final List<Pattern> REX_LIST = Arrays.asList(
-          Pattern.compile("^[甲乙]方.*[：:]"),
+          Pattern.compile("^[甲乙]方.{0,5}[：:]"),
           Pattern.compile("[0-9一二三四五六七八九十]+(个工作日|个?[周天日月年])"),
           Pattern.compile("\\d\\d%"),
           Pattern.compile("\\d{6,10}"),
