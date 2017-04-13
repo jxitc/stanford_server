@@ -54,7 +54,7 @@ public class ContractAnalyzer {
 
         if (i + 1 < toks.size()) {
           Token nextTok = toks.get(i + 1);
-          if (".".equals(nextTok.rawStr)) {
+          if (".".equals(nextTok.rawStr) || "页".equals(nextTok.rawStr)) {
             continue;
           }
         }
