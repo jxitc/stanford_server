@@ -26,4 +26,12 @@
 		<servlet-name>Contract</servlet-name>
 		<url-pattern>/contract</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>Bookkeeper</servlet-name>
+		<servlet-class>com.jxitc.servlet.BookkeeperServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Bookkeeper</servlet-name>
+		<url-pattern>/bookkeeper</url-pattern>
+	</servlet-mapping>
 </web-app>
