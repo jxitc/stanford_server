@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Contract servlet
@@ -30,6 +32,7 @@ public class ContractServlet extends HttpServlet {
     JSONObject rtn = new JSONObject();
     rtn.put("status", "ok");
     rtn.put("important", new JSONArray());
+    Map<String, String> keyValMap = new HashMap<String, String>();
     for (String line : lines) {
       line = line.trim();
       if (line.isEmpty()) {
@@ -39,9 +42,10 @@ public class ContractServlet extends HttpServlet {
       System.out.println("[processing] " + line);
       logger.info("[processing] " + line);
       try {
-        for (String importantSen : ca.extractImportantSentences(line)) {
+        for (String importantSen : ca.extractImportantSentences(line, keyValMap)) {
           rtn.getJSONArray("important").add(importantSen);
         }
+        rtn.put("key_values", keyValMap);
       } catch (Exception ex) {
         ex.printStackTrace();
       }

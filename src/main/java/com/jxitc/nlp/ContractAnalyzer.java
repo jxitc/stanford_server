@@ -3,9 +3,7 @@ package com.jxitc.nlp;
 import com.jxitc.servlet.ContractServlet;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,14 +28,25 @@ public class ContractAnalyzer {
           "[0-9一二三四五六七八九十]+(个工作日|个?[周天日月年])"
   );
 
-  public List<String> extractImportantSentences(String contractText) {
+  public List<String> extractImportantSentences(String contractText, Map<String, String> valMap) {
     List<Sentence> sentences = ChineseStanford.getInstance().parseDocument(contractText);
     List<String> rtn = new ArrayList<>();
     for (Sentence s : sentences) {
+      String sLine = s.getRawString();
       if (isImportant(s)) {
-        rtn.add(s.getRawString());
+        rtn.add(sLine);
+      }
+
+      Map<String, String> newValMap = ContractExtractor.getInstance().getVal(sLine);
+      if (newValMap == null || newValMap.isEmpty() || valMap == null) {
+        continue;
+      }
+
+      for (Map.Entry<String, String> entry : newValMap.entrySet()) {
+        valMap.put(entry.getKey(), entry.getValue());
       }
     }
+
     return rtn;
   }
 
@@ -89,7 +98,7 @@ public class ContractAnalyzer {
             "（二）首笔订单，甲方向乙方的采购量应不少于10000只（计量单位以下简称为“Pcs”）整机产品。\n 第5页/共9页 \n （二）执行本协议期间，双方的正式通知（包括联络人员的变更）应以书面形式提前函告对方。 \n" +
             "（三）甲方每个月定期应向乙方提供至少滚动12周的需求预测给乙方，并按双方确认的所列长交期物料的采购周期下发正式备料通知。由于滚动预测取消或变更造成的物料呆滞、半成品、成品等费用和损失全部由甲方承担。针对长交期物料在乙方已按甲方要求提前备料并能满足甲方出货需求的前提下，甲方至少在交货日期前四周下达正式订单给乙方并";
     ContractAnalyzer analyzer = new ContractAnalyzer();
-    for (String sen : analyzer.extractImportantSentences(doc)) {
+    for (String sen : analyzer.extractImportantSentences(doc, new HashMap<>())) {
       System.out.println(sen);
     }
   }
