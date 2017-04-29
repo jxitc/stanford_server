@@ -20,7 +20,7 @@ public class ContractExtractor {
   public static final String ZUQI = "zuqi";
   public static final String KAISHI_RIQI = "kaishi_riqi";
   public static final String JIESHU_RIQI = "jieshu_riqi";
-  public static final String ZUJIN = "ZUJIN";
+  public static final String ZUJIN = "zujin";
 
   private static final Map<String, Pattern> RULES = new ConcurrentHashMap<>();
   static {
