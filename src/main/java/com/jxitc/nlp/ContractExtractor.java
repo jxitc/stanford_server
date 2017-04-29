@@ -30,8 +30,8 @@ public class ContractExtractor {
     RULES.put(JIANZHU_MIANJI, Pattern.compile("建筑面积为[:：](?<VAL>[^平米]+)平米"));
     RULES.put(ZULIN_MIANJI, Pattern.compile("甲方同意将该承租单元(?<VAL>[^平米]+)平米出租给乙方"));
     RULES.put(ZUQI, Pattern.compile("本合同租赁期为[:：](?<VAL>[^年]+)年"));
-    RULES.put(KAISHI_RIQI, Pattern.compile("年，即自(?<VAL>[^起]+)起至([^止]+)止。免租"));
-    RULES.put(JIESHU_RIQI, Pattern.compile("年，即自([^起]+)起至(?<VAL>[^止]+)止。免租"));
+    RULES.put(KAISHI_RIQI, Pattern.compile("年，即自(?<VAL>[^起]+)起至([^止]+)止。"));
+    RULES.put(JIESHU_RIQI, Pattern.compile("年，即自([^起]+)起至(?<VAL>[^止]+)止。"));
     RULES.put(ZUJIN, Pattern.compile("税后租金\\)，共计(?<VAL>[^元]+)元"));
   }
 
